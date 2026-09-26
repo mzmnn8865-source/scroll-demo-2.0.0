@@ -1,0 +1,2635 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>آبان — استودیوی طراحی دیجیتال</title>
+<meta name="description" content="آبان؛ استودیوی دیجیتال برای برندهایی که آینده را زودتر می‌بینند.">
+<meta name="author" content="Aban Studio">
+<meta name="theme-color" content="#050510">
+<meta property="og:title" content="آبان — آینده‌ای که می‌سازیم">
+<meta property="og:description" content="استودیوی دیجیتال برای برندهای آینده‌نگر">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   RESET & VARIABLES
+   ========================================================================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root{
+  --bg-0: #050510;
+  --bg-1: #0a0a1c;
+  --bg-2: #0e0e26;
+  --cyan: #34f5e0;
+  --pink: #ff2e9a;
+  --violet: #8a5cf6;
+  --lime: #a3ff6b;
+  --ink-0: #f5f5fb;
+  --ink-1: #c8c8dc;
+  --ink-2: #9a9ab5;
+  --line: rgba(255,255,255,.09);
+  --line-hi: rgba(255,255,255,.18);
+  --glass: rgba(255,255,255,.045);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --ease-soft: cubic-bezier(.65,0,.35,1);
+  --ease-back: cubic-bezier(.34,1.56,.64,1);
+  --font-fa: 'Vazirmatn', sans-serif;
+  --font-en: 'Outfit', sans-serif;
+  --nav-h: 76px;
+}
+
+html[data-theme="light"]{
+  --bg-0: #f4f4fa;
+  --bg-1: #ffffff;
+  --bg-2: #eeeff7;
+  --ink-0: #0a0a1a;
+  --ink-1: #3a3a52;
+  --ink-2: #6c6c8a;
+  --line: rgba(0,0,0,.08);
+  --line-hi: rgba(0,0,0,.16);
+  --glass: rgba(0,0,0,.03);
+}
+
+html{
+  background: var(--bg-0);
+  scroll-behavior: auto;
+}
+
+body{
+  background: var(--bg-0);
+  color: var(--ink-0);
+  font-family: var(--font-fa);
+  overflow-x: hidden;
+  line-height: 1.6;
+  transition: background .5s var(--ease-out), color .5s var(--ease-out);
+}
+
+body.is-locked{ overflow: hidden; }
+
+.lang-en, .num{ font-family: var(--font-en); direction: ltr; unicode-bidi: isolate; }
+::selection{ background: var(--pink); color: var(--bg-0); }
+
+a{ color: inherit; text-decoration: none; }
+button{ font-family: inherit; border: none; background: none; color: inherit; cursor: pointer; }
+img, svg, canvas{ display: block; max-width: 100%; }
+
+::-webkit-scrollbar{ width: 8px; }
+::-webkit-scrollbar-track{ background: var(--bg-0); }
+::-webkit-scrollbar-thumb{ background: linear-gradient(var(--cyan), var(--pink)); border-radius: 10px; }
+
+a:focus-visible, button:focus-visible{
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.hidden-visually{
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+.container{ width: min(1180px, 92vw); margin-inline: auto; }
+
+.section{
+  position: relative;
+  padding: clamp(90px, 12vw, 150px) 0;
+}
+
+.section-tag{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--ink-2);
+  margin-bottom: 22px;
+  letter-spacing: .02em;
+}
+.section-tag::before{
+  content: "";
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 10px 2px var(--cyan);
+  flex-shrink: 0;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot{
+  0%,100%{ transform: scale(1); opacity: 1; }
+  50%{ transform: scale(.6); opacity: .6; }
+}
+
+.heading-xl{ font-size: clamp(34px, 6vw, 76px); font-weight: 800; line-height: 1.12; letter-spacing: -0.01em; }
+.heading-lg{ font-size: clamp(26px, 3.6vw, 46px); font-weight: 700; line-height: 1.25; }
+.body-lg{ font-size: clamp(16px, 1.6vw, 19px); color: var(--ink-1); max-width: 60ch; }
+
+.gradient-text{
+  background: linear-gradient(95deg, var(--cyan) 0%, var(--violet) 50%, var(--pink) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: grad-shift 6s ease-in-out infinite;
+}
+@keyframes grad-shift{
+  0%,100%{ background-position: 0% 50%; }
+  50%{ background-position: 100% 50%; }
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.btn{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 17px 34px;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--bg-0);
+  background: linear-gradient(100deg, var(--cyan), var(--violet) 60%, var(--pink));
+  background-size: 200% 100%;
+  isolation: isolate;
+  overflow: hidden;
+  transition: background-position .6s var(--ease-out), transform .3s var(--ease-back);
+}
+.btn:hover{ background-position: 100% 50%; }
+.btn::before{
+  content:"";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 40px 6px rgba(52,245,224,.4);
+  opacity: 0;
+  transition: opacity .4s var(--ease-out);
+  z-index: -1;
+}
+.btn:hover::before{ opacity: 1; }
+
+.btn-ghost{
+  color: var(--ink-0);
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 16px 32px;
+}
+.btn-ghost::before{ display: none; }
+.btn-ghost:hover{ border-color: var(--cyan); background: rgba(52,245,224,.06); }
+
+.ripple-holder{ position: relative; overflow: hidden; }
+.ripple{
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,.5);
+  transform: scale(0);
+  animation: ripple-anim .7s var(--ease-out);
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes ripple-anim{ to{ transform: scale(1); opacity: 0; } }
+
+/* ==========================================================================
+   CUSTOM CURSOR
+   ========================================================================== */
+.cursor-dot, .cursor-ring{
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  will-change: transform;
+  transform: translate(-50%,-50%);
+}
+.cursor-dot{
+  width: 6px; height: 6px;
+  background: var(--cyan);
+  box-shadow: 0 0 14px 3px var(--cyan);
+}
+.cursor-ring{
+  width: 40px; height: 40px;
+  border: 1.5px solid rgba(255,255,255,.5);
+  display: flex; align-items: center; justify-content: center;
+  transition: width .35s var(--ease-out), height .35s var(--ease-out), border-color .3s, background .3s;
+  font-size: 10px;
+  letter-spacing: .1em;
+  color: var(--ink-0);
+  font-family: var(--font-en);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.cursor-ring span{ opacity: 0; transition: opacity .25s; }
+.cursor-ring.is-active{
+  width: 82px; height: 82px;
+  border-color: var(--cyan);
+  background: rgba(52,245,224,.1);
+}
+.cursor-ring.is-active span{ opacity: 1; }
+
+body.using-cursor, body.using-cursor a, body.using-cursor button{ cursor: none; }
+
+@media (hover: none), (pointer: coarse){
+  .cursor-dot, .cursor-ring{ display: none !important; }
+}
+
+/* ==========================================================================
+   SCROLL PROGRESS + SECTION INDICATOR
+   ========================================================================== */
+.scroll-progress{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 9000;
+  background: rgba(255,255,255,.04);
+}
+.scroll-progress__bar{
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink));
+  box-shadow: 0 0 12px 1px var(--cyan);
+}
+
+.scroll-badge{
+  position: fixed;
+  bottom: 26px;
+  left: 26px;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 100px;
+  background: rgba(10,10,28,.6);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--line);
+  font-family: var(--font-en);
+  font-size: 12px;
+  letter-spacing: .08em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .5s, transform .5s var(--ease-out);
+}
+.scroll-badge.is-on{ opacity: 1; transform: translateY(0); }
+.scroll-badge__dot{
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px 2px var(--cyan);
+}
+.scroll-badge__num{ color: var(--cyan); font-weight: 700; }
+.scroll-badge__total{ color: var(--ink-2); }
+
+@media (max-width: 640px){ .scroll-badge{ display: none; } }
+
+/* ==========================================================================
+   THEME + SOUND TOGGLE
+   ========================================================================== */
+.utility-bar{
+  position: fixed;
+  top: 26px;
+  left: 26px;
+  z-index: 550;
+  display: flex;
+  gap: 8px;
+}
+.util-btn{
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: rgba(10,10,28,.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  transition: border-color .3s, background .3s, transform .3s var(--ease-back);
+  position: relative;
+  overflow: hidden;
+}
+.util-btn:hover{ border-color: var(--cyan); transform: scale(1.06); }
+.util-btn svg{ width: 18px; height: 18px; }
+.util-btn .icon-sun{ display: none; }
+html[data-theme="light"] .util-btn .icon-sun{ display: block; }
+html[data-theme="light"] .util-btn .icon-moon{ display: none; }
+
+@media (max-width: 640px){ .utility-bar{ top: 18px; left: 18px; } }
+
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+.nav{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  padding: 26px 0;
+  transition: padding .4s var(--ease-soft), background .4s, backdrop-filter .4s, border-color .4s;
+  border-bottom: 1px solid transparent;
+}
+.nav.is-scrolled{
+  padding: 14px 0;
+  background: rgba(5,5,16,.62);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid var(--line);
+}
+html[data-theme="light"] .nav.is-scrolled{ background: rgba(255,255,255,.72); }
+
+.nav__inner{ display: flex; align-items: center; justify-content: space-between; }
+
+.nav__logo{
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 800; font-size: 20px;
+  z-index: 501;
+  position: relative;
+}
+.nav__logo-mark{ width: 30px; height: 30px; transition: transform .5s var(--ease-back); }
+.nav__logo:hover .nav__logo-mark{ transform: rotate(180deg); }
+
+.nav__links{ display: flex; gap: 38px; list-style: none; }
+.nav__link{
+  position: relative;
+  font-size: 15px;
+  color: var(--ink-1);
+  padding-bottom: 4px;
+  transition: color .3s;
+}
+.nav__link::after{
+  content: "";
+  position: absolute; right: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, var(--cyan), var(--pink));
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .4s var(--ease-out);
+}
+.nav__link:hover{ color: var(--ink-0); }
+.nav__link:hover::after{ transform: scaleX(1); }
+
+.nav__cta{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border-radius: 100px;
+  border: 1px solid var(--line);
+  font-size: 14px;
+  transition: border-color .3s, background .3s, transform .3s var(--ease-back);
+}
+.nav__cta:hover{ border-color: var(--cyan); background: rgba(52,245,224,.06); transform: translateY(-2px); }
+
+.burger{
+  display: none;
+  width: 34px; height: 22px;
+  position: relative;
+  z-index: 501;
+}
+.burger span{
+  position: absolute; right: 0; width: 100%; height: 2px;
+  background: var(--ink-0); border-radius: 2px;
+  transition: transform .35s var(--ease-out), opacity .3s, width .3s, background .3s;
+}
+.burger span:nth-child(1){ top: 0; }
+.burger span:nth-child(2){ top: 10px; }
+.burger span:nth-child(3){ top: 20px; width: 70%; }
+.burger.is-open span:nth-child(1){ transform: translateY(10px) rotate(45deg); }
+.burger.is-open span:nth-child(2){ opacity: 0; }
+.burger.is-open span:nth-child(3){ transform: translateY(-10px) rotate(-45deg); width: 100%; }
+
+.mobile-menu{
+  position: fixed; inset: 0;
+  background: var(--bg-1);
+  z-index: 490;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 30px;
+  clip-path: circle(0% at 90% 5%);
+  transition: clip-path .7s var(--ease-soft);
+  pointer-events: none;
+}
+.mobile-menu.is-open{ clip-path: circle(160% at 90% 5%); pointer-events: all; }
+.mobile-menu a{
+  font-size: clamp(24px, 6vw, 32px);
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .5s, transform .5s var(--ease-out), color .3s;
+}
+.mobile-menu.is-open a{ opacity: 1; transform: translateY(0); }
+.mobile-menu.is-open a:nth-child(1){ transition-delay: .15s; }
+.mobile-menu.is-open a:nth-child(2){ transition-delay: .22s; }
+.mobile-menu.is-open a:nth-child(3){ transition-delay: .29s; }
+.mobile-menu.is-open a:nth-child(4){ transition-delay: .36s; }
+.mobile-menu.is-open a:nth-child(5){ transition-delay: .43s; }
+.mobile-menu a:hover{ color: var(--cyan); }
+
+/* ==========================================================================
+   PRELOADER
+   ========================================================================== */
+.preloader{
+  position: fixed; inset: 0;
+  z-index: 10000;
+  background: var(--bg-0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+}
+.preloader__word{
+  font-family: var(--font-en);
+  font-size: clamp(14px, 2vw, 18px);
+  letter-spacing: .35em;
+  color: var(--ink-2);
+  min-height: 1.4em;
+}
+.preloader__count{
+  font-family: var(--font-en);
+  font-size: clamp(60px, 14vw, 140px);
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(95deg, var(--cyan), var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.preloader__count sup{
+  font-size: .35em;
+  font-weight: 500;
+  color: var(--ink-2);
+  background: none;
+  -webkit-text-fill-color: var(--ink-2);
+}
+.preloader__bar{
+  width: min(280px, 60vw);
+  height: 2px;
+  background: rgba(255,255,255,.08);
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.preloader__bar-fill{
+  position: absolute; inset: 0 100% 0 0;
+  background: linear-gradient(90deg, var(--cyan), var(--violet));
+  box-shadow: 0 0 10px 1px var(--cyan);
+}
+.preloader__hint{
+  position: absolute;
+  bottom: 40px;
+  font-size: 12px;
+  color: var(--ink-2);
+  letter-spacing: .15em;
+  font-family: var(--font-en);
+  opacity: 0;
+}
+
+/* ==========================================================================
+   BACKGROUND FIELD
+   ========================================================================== */
+.field{
+  position: absolute; inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.blob{
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: .45;
+  will-change: transform;
+}
+.blob--cyan{ background: var(--cyan); }
+.blob--pink{ background: var(--pink); }
+.blob--violet{ background: var(--violet); }
+.blob--lime{ background: var(--lime); }
+
+.grid-lines{
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
+  opacity: .6;
+}
+
+.noise{
+  position: fixed; inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* ==========================================================================
+   PARTICLES CANVAS
+   ========================================================================== */
+.particles-canvas{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .55;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero{
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding-top: 90px;
+  z-index: 2;
+}
+.hero__eyebrow{
+  display: flex; align-items: center; gap: 10px;
+  color: var(--ink-2);
+  font-size: 14px;
+  margin-bottom: 30px;
+  opacity: 0;
+}
+.hero__eyebrow-dot{
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--pink);
+  box-shadow: 0 0 10px 2px var(--pink);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+.hero__title{
+  font-size: clamp(42px, 9vw, 112px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  max-width: 18ch;
+}
+.hero__title .word{
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: .08em;
+  vertical-align: bottom;
+}
+.hero__title .word > span{
+  display: inline-block;
+  transform: translateY(115%);
+  will-change: transform;
+}
+.hero__sub{
+  margin-top: 30px;
+  font-size: clamp(16px, 1.8vw, 20px);
+  color: var(--ink-1);
+  max-width: 46ch;
+  opacity: 0;
+}
+.hero__ctas{
+  margin-top: 44px;
+  display: flex; gap: 16px;
+  opacity: 0;
+}
+.hero__scroll{
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink-2);
+  font-size: 11px;
+  letter-spacing: .18em;
+  opacity: 0;
+  font-family: var(--font-en);
+}
+.hero__mouse{
+  width: 26px; height: 42px;
+  border: 1.5px solid var(--ink-2);
+  border-radius: 20px;
+  position: relative;
+}
+.hero__mouse::before{
+  content: "";
+  position: absolute;
+  top: 7px; left: 50%;
+  width: 4px; height: 8px;
+  border-radius: 3px;
+  background: var(--cyan);
+  transform: translateX(-50%);
+  animation: mouse-scroll 1.8s ease-in-out infinite;
+}
+@keyframes mouse-scroll{
+  0%{ transform: translate(-50%,0); opacity: 1; }
+  70%{ opacity: 0; }
+  100%{ transform: translate(-50%,14px); opacity: 0; }
+}
+
+/* ==========================================================================
+   MARQUEE
+   ========================================================================== */
+.marquee{
+  position: relative;
+  overflow: hidden;
+  padding: 34px 0;
+  border-block: 1px solid var(--line);
+  margin: 0;
+  z-index: 2;
+}
+.marquee__track{
+  display: flex;
+  gap: 60px;
+  white-space: nowrap;
+  will-change: transform;
+  font-size: clamp(24px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+.marquee__item{
+  display: inline-flex;
+  align-items: center;
+  gap: 60px;
+}
+.marquee__sep{
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px 2px var(--cyan);
+  flex-shrink: 0;
+}
+.marquee__item--ghost{ color: transparent; -webkit-text-stroke: 1px var(--ink-2); }
+
+/* ==========================================================================
+   INTRO
+   ========================================================================== */
+.intro__text{
+  font-size: clamp(22px, 3.4vw, 40px);
+  font-weight: 500;
+  line-height: 1.55;
+  max-width: 22ch;
+}
+.split-line{ overflow: hidden; display: block; }
+.split-line > span{ display: inline-block; will-change: transform, opacity; }
+.intro__text .dim{ color: var(--ink-2); }
+
+/* ==========================================================================
+   PINNED ZOOM
+   ========================================================================== */
+.pin-zoom{ height: 200vh; position: relative; }
+.pin-zoom__stage{
+  position: sticky; top: 0;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.pin-zoom__text{
+  font-size: clamp(30px, 7vw, 90px);
+  font-weight: 800;
+  text-align: center;
+  max-width: 16ch;
+  will-change: transform, opacity;
+  padding: 0 20px;
+}
+
+/* ==========================================================================
+   FEATURES (BENTO)
+   ========================================================================== */
+.bento{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin-top: 60px;
+}
+.bento-card{
+  position: relative;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 34px;
+  overflow: hidden;
+  will-change: transform, opacity;
+  transition: border-color .4s, transform .5s var(--ease-out);
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+html[data-theme="light"] .bento-card{
+  background: linear-gradient(160deg, rgba(0,0,0,.02), rgba(0,0,0,0));
+}
+.bento-card:hover{ border-color: var(--line-hi); }
+
+.bento-card__inner{ position: relative; z-index: 2; transform: translateZ(30px); }
+
+.bento-card__glow{
+  position: absolute;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0;
+  transition: opacity .5s;
+  pointer-events: none;
+  z-index: 1;
+}
+.bento-card:hover .bento-card__glow{ opacity: .35; }
+
+.bento-card__icon{
+  width: 48px; height: 48px;
+  margin-bottom: 24px;
+  color: var(--cyan);
+  transition: transform .5s var(--ease-back);
+}
+.bento-card:hover .bento-card__icon{ transform: translateZ(60px) rotate(-8deg) scale(1.1); }
+
+.bento-card__title{ font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+.bento-card__desc{ font-size: 14.5px; color: var(--ink-1); max-width: 34ch; line-height: 1.75; }
+
+.bento-card--big{ grid-column: span 3; grid-row: span 2; padding: 44px; }
+.bento-card--wide{ grid-column: span 3; }
+.bento-card--half{ grid-column: span 3; }
+.bento-card--small{ grid-column: span 2; }
+
+.bento-card--big .bento-card__title{ font-size: 26px; }
+.bento-card--big .bento-card__icon{ width: 56px; height: 56px; }
+
+@media (max-width: 900px){
+  .bento{ grid-template-columns: repeat(2, 1fr); }
+  .bento-card--big, .bento-card--wide, .bento-card--half{ grid-column: span 2; grid-row: auto; }
+  .bento-card--small{ grid-column: span 1; }
+}
+@media (max-width: 560px){
+  .bento{ grid-template-columns: 1fr; }
+  .bento-card, .bento-card--small{ grid-column: 1; }
+}
+
+/* ==========================================================================
+   HORIZONTAL GALLERY
+   ========================================================================== */
+.hgallery{ height: 400vh; position: relative; }
+.hgallery__stage{
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.hgallery__head{
+  position: absolute;
+  top: clamp(70px, 10vh, 110px);
+  right: 0; left: 0;
+  z-index: 2;
+  text-align: center;
+  pointer-events: none;
+  padding: 0 20px;
+}
+.hgallery__track{
+  display: flex;
+  gap: 34px;
+  padding-inline: 6vw;
+  will-change: transform;
+}
+.gallery-card{
+  flex: 0 0 auto;
+  width: min(66vw, 460px);
+  height: min(58vh, 480px);
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.015));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  position: relative;
+  overflow: hidden;
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: none;
+  will-change: transform;
+}
+html[data-theme="light"] .gallery-card{
+  background: linear-gradient(160deg, rgba(0,0,0,.03), rgba(0,0,0,.01));
+}
+.gallery-card__num{
+  position: absolute;
+  top: 26px; left: 30px;
+  font-family: var(--font-en);
+  font-size: 15px;
+  color: var(--ink-2);
+  z-index: 3;
+  letter-spacing: .08em;
+}
+.gallery-card__glow{
+  position: absolute;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .4;
+  top: -60px; right: -60px;
+  transition: opacity .5s, transform .5s;
+}
+.gallery-card:hover .gallery-card__glow{ opacity: .7; transform: scale(1.15); }
+.gallery-card__title{ font-size: 24px; font-weight: 700; margin-bottom: 10px; position: relative; z-index: 2; }
+.gallery-card__desc{ font-size: 14.5px; color: var(--ink-1); position: relative; z-index: 2; }
+
+.gallery-card__tag{
+  position: absolute;
+  top: 26px; right: 30px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(52,245,224,.12);
+  border: 1px solid rgba(52,245,224,.3);
+  color: var(--cyan);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  z-index: 3;
+}
+
+/* ==========================================================================
+   STATS
+   ========================================================================== */
+.stats__grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-top: 60px;
+  text-align: center;
+}
+.stat{ position: relative; padding: 20px 0; }
+.stat::after{
+  content: "";
+  position: absolute;
+  top: 20%; bottom: 20%; left: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--line-hi), transparent);
+}
+.stat:first-child::after{ display: none; }
+.stat__num{
+  font-family: var(--font-en);
+  font-size: clamp(38px, 5.6vw, 64px);
+  font-weight: 700;
+  background: linear-gradient(95deg, var(--cyan), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+}
+.stat__label{ margin-top: 12px; color: var(--ink-1); font-size: 14.5px; }
+
+@media (max-width: 900px){
+  .stats__grid{ grid-template-columns: repeat(2, 1fr); gap: 30px 20px; }
+  .stat:nth-child(odd)::after{ display: none; }
+}
+
+/* ==========================================================================
+   PIN QUOTE
+   ========================================================================== */
+.pin-quote{ height: 180vh; position: relative; }
+.pin-quote__stage{
+  position: sticky; top: 0;
+  height: 100svh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 0 20px;
+}
+.pin-quote blockquote{
+  font-size: clamp(24px, 4.4vw, 54px);
+  font-weight: 600;
+  max-width: 22ch;
+  line-height: 1.4;
+}
+.pin-quote cite{
+  display: block;
+  margin-top: 30px;
+  font-style: normal;
+  color: var(--ink-2);
+  font-size: 15px;
+  letter-spacing: .1em;
+}
+
+/* ==========================================================================
+   TESTIMONIALS
+   ========================================================================== */
+.testimonials{
+  position: relative;
+  overflow: hidden;
+}
+.testimonials__viewport{
+  display: flex;
+  transition: transform .7s var(--ease-out);
+  will-change: transform;
+}
+.testimonial{
+  flex: 0 0 100%;
+  padding: 50px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: linear-gradient(150deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+html[data-theme="light"] .testimonial{
+  background: linear-gradient(150deg, rgba(0,0,0,.02), rgba(0,0,0,0));
+}
+.testimonial__quote{
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.7;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+.testimonial__author{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.testimonial__avatar{
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--pink));
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: var(--bg-0);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.testimonial__name{ font-weight: 700; font-size: 15px; }
+.testimonial__role{ color: var(--ink-2); font-size: 13px; }
+
+.testimonials__dots{
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 30px;
+}
+.testimonials__dot{
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--line-hi);
+  transition: all .3s;
+  cursor: pointer;
+}
+.testimonials__dot.is-active{
+  width: 28px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--cyan), var(--pink));
+}
+
+/* ==========================================================================
+   PROCESS
+   ========================================================================== */
+.process__list{ margin-top: 50px; border-top: 1px solid var(--line); }
+.process__item{
+  display: grid;
+  grid-template-columns: 90px 1fr 40px;
+  align-items: center;
+  gap: 24px;
+  padding: 34px 0;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  transition: background .4s;
+  cursor: pointer;
+}
+.process__num{ font-family: var(--font-en); color: var(--ink-2); font-size: 15px; letter-spacing: .1em; }
+.process__title{ font-size: clamp(19px, 2.4vw, 26px); font-weight: 700; }
+.process__desc{ color: var(--ink-1); font-size: 14.5px; margin-top: 6px; max-width: 60ch; }
+.process__arrow{
+  color: var(--cyan);
+  opacity: 0;
+  transition: opacity .3s, transform .3s;
+  transform: translateX(10px);
+}
+.process__item:hover .process__arrow{ opacity: 1; transform: translateX(0); }
+.process__item:hover{ background: rgba(255,255,255,.02); }
+
+@media (max-width: 900px){
+  .process__item{ grid-template-columns: 50px 1fr; }
+  .process__arrow{ display: none; }
+}
+
+/* ==========================================================================
+   FAQ
+   ========================================================================== */
+.faq{ margin-top: 50px; border-top: 1px solid var(--line); }
+.faq__item{
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background .3s;
+}
+.faq__item:hover{ background: rgba(255,255,255,.015); }
+.faq__q{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px 0;
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 700;
+  transition: color .3s;
+}
+.faq__q:hover{ color: var(--cyan); }
+.faq__toggle{
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: all .4s var(--ease-out);
+  position: relative;
+}
+.faq__toggle::before,
+.faq__toggle::after{
+  content: "";
+  position: absolute;
+  background: currentColor;
+  transition: transform .4s var(--ease-out), opacity .3s;
+}
+.faq__toggle::before{ width: 12px; height: 1.5px; }
+.faq__toggle::after{ width: 1.5px; height: 12px; }
+.faq__item.is-open .faq__toggle{
+  background: var(--cyan);
+  color: var(--bg-0);
+  border-color: var(--cyan);
+}
+.faq__item.is-open .faq__toggle::after{ transform: scaleY(0); opacity: 0; }
+
+.faq__a{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s var(--ease-out), padding .5s;
+}
+.faq__a-inner{
+  padding-bottom: 26px;
+  color: var(--ink-1);
+  font-size: 15px;
+  line-height: 1.85;
+  max-width: 70ch;
+}
+.faq__item.is-open .faq__a{ max-height: 320px; }
+
+/* ==========================================================================
+   CTA FINAL
+   ========================================================================== */
+.cta{
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta__title{
+  font-size: clamp(40px, 9vw, 118px);
+  font-weight: 800;
+  line-height: 1.05;
+  will-change: transform;
+  padding: 0 20px;
+}
+.cta__sub{ margin-top: 26px; color: var(--ink-1); font-size: 17px; padding: 0 20px; }
+.cta__actions{ margin-top: 44px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; padding: 0 20px; }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footer{
+  border-top: 1px solid var(--line);
+  padding: 60px 0 34px;
+  position: relative;
+  z-index: 2;
+}
+.footer__top{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+.footer__cols{ display: flex; gap: 70px; flex-wrap: wrap; }
+.footer__col h4{
+  font-size: 13px;
+  color: var(--ink-2);
+  margin-bottom: 16px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.footer__col a{
+  display: block;
+  color: var(--ink-1);
+  font-size: 15px;
+  margin-bottom: 10px;
+  transition: color .2s, transform .3s;
+}
+.footer__col a:hover{ color: var(--cyan); transform: translateX(-4px); }
+.footer__bottom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.footer__social{
+  display: flex;
+  gap: 10px;
+}
+.footer__social a{
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  transition: all .3s var(--ease-back);
+}
+.footer__social a:hover{
+  border-color: var(--cyan);
+  background: rgba(52,245,224,.08);
+  transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   BACK TO TOP
+   ========================================================================== */
+.to-top{
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(10,10,28,.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  z-index: 700;
+  opacity: 0;
+  transform: translateY(20px) scale(.85);
+  pointer-events: none;
+  transition: all .5s var(--ease-back);
+}
+.to-top.is-on{ opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
+.to-top:hover{ border-color: var(--cyan); transform: translateY(-4px) scale(1.05); }
+.to-top svg{ width: 18px; height: 18px; }
+
+@media (max-width: 640px){ .to-top{ bottom: 20px; right: 20px; } }
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 900px){
+  .nav__links{ display: none; }
+  .nav__cta{ display: none; }
+  .burger{ display: block; }
+}
+
+@media (max-width: 560px){
+  .gallery-card{ width: 82vw; height: 62vh; padding: 26px; }
+  .hero__ctas{ flex-direction: column; width: 100%; max-width: 280px; }
+  .hero__ctas .btn{ width: 100%; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PARTICLES CANVAS
+     ══════════════════════════════════════════════════════════════ -->
+<canvas class="particles-canvas" id="particles"></canvas>
+
+<!-- NOISE -->
+<div class="noise"></div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"><span id="cursorLabel">VIEW</span></div>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress"><div class="scroll-progress__bar" id="scrollBar"></div></div>
+
+<!-- SCROLL BADGE -->
+<div class="scroll-badge" id="scrollBadge">
+  <span class="scroll-badge__dot"></span>
+  <span class="scroll-badge__num" id="sbNum">01</span>
+  <span class="scroll-badge__total">/ 08</span>
+</div>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <button class="util-btn" id="themeToggle" aria-label="تغییر تم">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  </button>
+</div>
+
+<!-- PRELOADER -->
+<div class="preloader" id="preloader">
+  <div class="preloader__word" id="preWord"></div>
+  <div class="preloader__count"><span id="preCount">0</span><sup>٪</sup></div>
+  <div class="preloader__bar"><div class="preloader__bar-fill" id="preBar"></div></div>
+  <div class="preloader__hint" id="preHint">PRESS ANYWHERE TO CONTINUE</div>
+</div>
+
+<!-- NAV -->
+<header class="nav" id="siteNav">
+  <div class="container nav__inner">
+    <a href="#top" class="nav__logo" data-cursor="TOP">
+      <svg class="nav__logo-mark" viewBox="0 0 40 40" fill="none">
+        <path d="M20 3 L36 20 L20 37 L4 20 Z" stroke="url(#lg1)" stroke-width="2"/>
+        <circle cx="20" cy="20" r="5" fill="url(#lg1)"/>
+        <defs>
+          <linearGradient id="lg1" x1="4" y1="3" x2="36" y2="37">
+            <stop offset="0" stop-color="#34f5e0"/>
+            <stop offset="1" stop-color="#ff2e9a"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span>آبان</span>
+    </a>
+    <nav>
+      <ul class="nav__links">
+        <li><a class="nav__link" href="#intro">درباره</a></li>
+        <li><a class="nav__link" href="#features">قابلیت‌ها</a></li>
+        <li><a class="nav__link" href="#gallery">نمونه‌کارها</a></li>
+        <li><a class="nav__link" href="#process">فرآیند</a></li>
+        <li><a class="nav__link" href="#faq">سوالات</a></li>
+      </ul>
+    </nav>
+    <a href="#cta" class="nav__cta" data-magnetic data-cursor="بزن بریم">شروع پروژه</a>
+    <button class="burger" id="burger" aria-label="منو"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#intro">درباره</a>
+  <a href="#features">قابلیت‌ها</a>
+  <a href="#gallery">نمونه‌کارها</a>
+  <a href="#process">فرآیند</a>
+  <a href="#cta">شروع پروژه</a>
+</div>
+
+<main id="top">
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero" id="hero">
+    <div class="field">
+      <div class="grid-lines"></div>
+      <div class="blob blob--cyan" data-speed="0.3" style="width:420px;height:420px;top:-120px;right:-100px;"></div>
+      <div class="blob blob--pink" data-speed="0.55" style="width:340px;height:340px;bottom:-80px;left:-90px;"></div>
+      <div class="blob blob--violet" data-speed="0.15" style="width:300px;height:300px;top:40%;left:45%;"></div>
+    </div>
+
+    <p class="hero__eyebrow" id="heroEyebrow">
+      <span class="hero__eyebrow-dot"></span>
+      استودیوی طراحی دیجیتال آبان
+    </p>
+
+    <h1 class="hero__title" id="heroTitle">آینده را طراحی می‌کنیم، همین امروز</h1>
+
+    <p class="hero__sub" id="heroSub">
+      ما تجربه‌های دیجیتالی می‌سازیم که بین یک صفحه‌ی معمولی و یک خاطره، تفاوت را مشخص می‌کنند.
+    </p>
+
+    <div class="hero__ctas" id="heroCtas">
+      <a href="#cta" class="btn ripple-holder" data-magnetic data-cursor="شروع">
+        شروع همکاری
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+      <a href="#gallery" class="btn btn-ghost" data-magnetic data-cursor="نمایش">دیدن نمونه‌کارها</a>
+    </div>
+
+    <div class="hero__scroll" id="heroScroll">
+      <span>SCROLL</span>
+      <div class="hero__mouse"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ MARQUEE ═══════════ -->
+  <div class="marquee">
+    <div class="marquee__track" id="marqueeTrack">
+      <span class="marquee__item">طراحی <span class="marquee__sep"></span> توسعه <span class="marquee__sep"></span> انیمیشن <span class="marquee__sep"></span> <span class="marquee__item--ghost">DESIGN</span> <span class="marquee__sep"></span> CODE <span class="marquee__sep"></span> MOTION <span class="marquee__sep"></span></span>
+    </div>
+  </div>
+
+  <!-- ═══════════ INTRO ═══════════ -->
+  <section class="section" id="intro">
+    <div class="container">
+      <p class="section-tag">درباره‌ی ما</p>
+      <p class="intro__text">
+        <span class="split-line"><span>آبان جایی است که استراتژی،</span></span>
+        <span class="split-line"><span>طراحی و مهندسی دقیق</span></span>
+        <span class="split-line"><span class="dim">کنار هم می‌نشینند تا محصولی بسازند</span></span>
+        <span class="split-line"><span class="dim">که کاربران فراموشش نمی‌کنند.</span></span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════ PIN ZOOM ═══════════ -->
+  <section class="pin-zoom">
+    <div class="pin-zoom__stage">
+      <div class="field">
+        <div class="blob blob--violet" style="width:500px;height:500px;top:20%;right:10%;opacity:.25"></div>
+      </div>
+      <h2 class="pin-zoom__text">هر پیکسل، <span class="gradient-text">یک تصمیم</span> است.</h2>
+    </div>
+  </section>
+
+  <!-- ═══════════ BENTO FEATURES ═══════════ -->
+  <section class="section" id="features">
+    <div class="container">
+      <p class="section-tag">قابلیت‌ها</p>
+      <h2 class="heading-lg">چیزی که ما را متفاوت می‌کند</h2>
+
+      <div class="bento">
+        <article class="bento-card bento-card--big">
+          <div class="bento-card__glow blob--cyan"></div>
+          <div class="bento-card__inner">
+            <svg class="bento-card__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 4 L44 24 L24 44 L4 24 Z"/><circle cx="24" cy="24" r="7"/></svg>
+            <h3 class="bento-card__title">طراحی سینمایی</h3>
+            <p class="bento-card__desc">هر بخش از سایت مثل یک صحنه از یک فیلم روایت می‌شود، نه فقط یک اسکرول ساده. از پریلودر تا فوتر، همه چیز به هم متصل است و کاربر را در یک داستان غرق می‌کند.</p>
+          </div>
+        </article>
+
+        <article class="bento-card bento-card--wide">
+          <div class="bento-card__glow blob--pink"></div>
+          <div class="bento-card__inner">
+            <svg class="bento-card__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="32" height="32" rx="8"/><path d="M16 24h16M24 16v16"/></svg>
+            <h3 class="bento-card__title">مهندسی دقیق</h3>
+            <p class="bento-card__desc">کدی تمیز، سریع و پایدار که پشت هر انیمیشن جذاب پنهان شده است.</p>
+          </div>
+        </article>
+
+        <article class="bento-card bento-card--half">
+          <div class="bento-card__glow blob--violet"></div>
+          <div class="bento-card__inner">
+            <svg class="bento-card__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="18"/><path d="M24 14v10l7 5"/></svg>
+            <h3 class="bento-card__title">اجرای سریع</h3>
+            <p class="bento-card__desc">از ایده تا لانچ، بدون معطلی‌های همیشگی پروژه‌های دیجیتال.</p>
+          </div>
+        </article>
+
+        <article class="bento-card bento-card--half">
+          <div class="bento-card__glow blob--cyan"></div>
+          <div class="bento-card__inner">
+            <svg class="bento-card__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 36 L18 20 L28 30 L40 10"/></svg>
+            <h3 class="bento-card__title">داده‌محور</h3>
+            <p class="bento-card__desc">هر تصمیم طراحی با تحلیل رفتار کاربر پشتیبانی می‌شود.</p>
+          </div>
+        </article>
+
+        <article class="bento-card bento-card--small">
+          <div class="bento-card__glow blob--pink"></div>
+          <div class="bento-card__inner">
+            <svg class="bento-card__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 6 C34 6 42 14 42 24 C42 34 34 42 24 42 C14 42 6 34 6 24"/></svg>
+            <h3 class="bento-card__title">پشتیبانی مستمر</h3>
+            <p class="bento-card__desc">بعد از لانچ هم کنار پروژه‌ی شما می‌مانیم.</p>
+          </div>
+        </article>
+
+        <article class="bento-card bento-card--small">
+          <div class="bento-card__glow blob--lime"></div>
+          <div class="bento-card__inner">
+            <svg class="bento-card__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="10" y="14" width="28" height="20" rx="3"/><path d="M10 20h28"/></svg>
+            <h3 class="bento-card__title">هماهنگی برند</h3>
+            <p class="bento-card__desc">هر خروجی همان چیزی است که برند شما نیاز دارد.</p>
+          </div>
+        </article>
+
+        <article class="bento-card bento-card--small">
+          <div class="bento-card__glow blob--cyan"></div>
+          <div class="bento-card__inner">
+            <svg class="bento-card__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="18"/><path d="M24 6v36M6 24h36"/></svg>
+            <h3 class="bento-card__title">مقیاس‌پذیری</h3>
+            <p class="bento-card__desc">از استارتاپ تا سازمان، همیشه آماده‌ی رشد.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ HORIZONTAL GALLERY ═══════════ -->
+  <section class="hgallery" id="gallery">
+    <div class="hgallery__stage">
+      <div class="hgallery__head">
+        <p class="section-tag" style="justify-content:center">نمونه‌کارها</p>
+        <h2 class="heading-lg">پروژه‌هایی که به آن‌ها افتخار می‌کنیم</h2>
+      </div>
+      <div class="hgallery__track" id="hTrack">
+
+        <article class="gallery-card" data-cursor="باز کن">
+          <span class="gallery-card__num">01</span>
+          <span class="gallery-card__tag">فین‌تک</span>
+          <div class="gallery-card__glow blob--cyan"></div>
+          <h3 class="gallery-card__title">نوسان</h3>
+          <p class="gallery-card__desc">پلتفرم معاملاتی با تجربه‌ی کاربری روان و داشبورد زنده.</p>
+        </article>
+
+        <article class="gallery-card" data-cursor="باز کن">
+          <span class="gallery-card__num">02</span>
+          <span class="gallery-card__tag">برند</span>
+          <div class="gallery-card__glow blob--pink"></div>
+          <h3 class="gallery-card__title">مهتاب</h3>
+          <p class="gallery-card__desc">هویت بصری و وب‌سایت برای برند لوازم آرایشی مینیمال.</p>
+        </article>
+
+        <article class="gallery-card" data-cursor="باز کن">
+          <span class="gallery-card__num">03</span>
+          <span class="gallery-card__tag">اپلیکیشن</span>
+          <div class="gallery-card__glow blob--violet"></div>
+          <h3 class="gallery-card__title">پیک</h3>
+          <p class="gallery-card__desc">اپلیکیشن تحویل غذا با تمرکز بر سرعت و سادگی سفارش.</p>
+        </article>
+
+        <article class="gallery-card" data-cursor="باز کن">
+          <span class="gallery-card__num">04</span>
+          <span class="gallery-card__tag">آموزش</span>
+          <div class="gallery-card__glow blob--cyan"></div>
+          <h3 class="gallery-card__title">درسا</h3>
+          <p class="gallery-card__desc">پلتفرم آموزش آنلاین با مسیرهای یادگیری شخصی‌سازی‌شده.</p>
+        </article>
+
+        <article class="gallery-card" data-cursor="باز کن">
+          <span class="gallery-card__num">05</span>
+          <span class="gallery-card__tag">فروشگاهی</span>
+          <div class="gallery-card__glow blob--lime"></div>
+          <h3 class="gallery-card__title">ریواس</h3>
+          <p class="gallery-card__desc">فروشگاه آنلاین محصولات ارگانیک با چیدمانی تازه و گرم.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ STATS ═══════════ -->
+  <section class="section" id="stats">
+    <div class="container">
+      <p class="section-tag">در یک نگاه</p>
+      <h2 class="heading-lg">عددهایی که پشت‌شان داستان داریم</h2>
+      <div class="stats__grid">
+        <div class="stat">
+          <div class="stat__num"><span class="counter" data-target="120" data-suffix="+">۰</span></div>
+          <p class="stat__label">پروژه‌ی تکمیل‌شده</p>
+        </div>
+        <div class="stat">
+          <div class="stat__num"><span class="counter" data-target="58" data-suffix="+">۰</span></div>
+          <p class="stat__label">مشتری راضی</p>
+        </div>
+        <div class="stat">
+          <div class="stat__num"><span class="counter" data-target="12" data-suffix="">۰</span></div>
+          <p class="stat__label">جایزه‌ی طراحی</p>
+        </div>
+        <div class="stat">
+          <div class="stat__num"><span class="counter" data-target="99" data-suffix="٪">۰</span></div>
+          <p class="stat__label">رضایت مشتریان</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PIN QUOTE ═══════════ -->
+  <section class="pin-quote">
+    <div class="pin-quote__stage">
+      <div class="field"><div class="blob blob--cyan" style="width:460px;height:460px;bottom:-10%;left:20%;opacity:.2"></div></div>
+      <div>
+        <blockquote>«طراحی خوب توضیح داده نمی‌شود، <span class="gradient-text">حس می‌شود.</span>»</blockquote>
+        <cite>— TEAM ABAN</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ TESTIMONIALS ═══════════ -->
+  <section class="section testimonials" id="testimonials">
+    <div class="container">
+      <p class="section-tag">نظر مشتریان</p>
+      <h2 class="heading-lg">آن‌ها چه می‌گویند</h2>
+
+      <div style="overflow:hidden;border-radius:22px;margin-top:50px;">
+        <div class="testimonials__viewport" id="testimonialViewport">
+          <div class="testimonial">
+            <p class="testimonial__quote">«آبان تنها استودیویی بود که توانست همزمان هم استراتژی برند ما را بفهمد و هم آن را با یک تجربه‌ی بصری بی‌نقص پیاده‌سازی کند.»</p>
+            <div class="testimonial__author">
+              <div class="testimonial__avatar">ن</div>
+              <div>
+                <div class="testimonial__name">نگار محمدی</div>
+                <div class="testimonial__role">مدیر برند، مهتاب</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <p class="testimonial__quote">«سرعت اجرا و دقت در جزئیات چیزی بود که ما را شگفت‌زده کرد. انگار آن‌ها از قبل می‌دانستند ما چه می‌خواهیم.»</p>
+            <div class="testimonial__author">
+              <div class="testimonial__avatar">ع</div>
+              <div>
+                <div class="testimonial__name">علی رستگار</div>
+                <div class="testimonial__role">بنیان‌گذار، پیک</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <p class="testimonial__quote">«بعد از همکاری با آبان، نرخ تبدیل سایت ما ۴۰٪ افزایش پیدا کرد. کاملاً نتیجه‌محور کار می‌کنند.»</p>
+            <div class="testimonial__author">
+              <div class="testimonial__avatar">س</div>
+              <div>
+                <div class="testimonial__name">سارا کریمی</div>
+                <div class="testimonial__role">مدیر محصول، نوسان</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonials__dots" id="testimonialDots">
+        <button class="testimonials__dot is-active" data-i="0" aria-label="نظر ۱"></button>
+        <button class="testimonials__dot" data-i="1" aria-label="نظر ۲"></button>
+        <button class="testimonials__dot" data-i="2" aria-label="نظر ۳"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PROCESS ═══════════ -->
+  <section class="section" id="process">
+    <div class="container">
+      <p class="section-tag">فرآیند کار</p>
+      <h2 class="heading-lg">از ایده تا اجرا، چهار گام</h2>
+      <div class="process__list">
+
+        <div class="process__item">
+          <span class="process__num">01</span>
+          <div>
+            <h3 class="process__title">کشف و پژوهش</h3>
+            <p class="process__desc">شناخت برند، مخاطب و رقبا پیش از هر خط طراحی.</p>
+          </div>
+          <svg class="process__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </div>
+
+        <div class="process__item">
+          <span class="process__num">02</span>
+          <div>
+            <h3 class="process__title">طراحی تجربه</h3>
+            <p class="process__desc">ساخت نمونه‌های اولیه و آزمایش آن‌ها با کاربران واقعی.</p>
+          </div>
+          <svg class="process__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </div>
+
+        <div class="process__item">
+          <span class="process__num">03</span>
+          <div>
+            <h3 class="process__title">توسعه و انیمیشن</h3>
+            <p class="process__desc">پیاده‌سازی با کدی تمیز و انیمیشن‌هایی هدفمند، نه تزئینی.</p>
+          </div>
+          <svg class="process__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </div>
+
+        <div class="process__item">
+          <span class="process__num">04</span>
+          <div>
+            <h3 class="process__title">لانچ و رشد</h3>
+            <p class="process__desc">انتشار، پایش داده‌ها و بهبود مستمر پس از عرضه.</p>
+          </div>
+          <svg class="process__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FAQ ═══════════ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <p class="section-tag">سوالات پرتکرار</p>
+      <h2 class="heading-lg">چیزهایی که شاید بپرسید</h2>
+
+      <div class="faq">
+        <div class="faq__item">
+          <div class="faq__q">
+            <span>چقدر طول می‌کشد تا پروژه‌ی من آماده شود؟</span>
+            <span class="faq__toggle"></span>
+          </div>
+          <div class="faq__a">
+            <div class="faq__a-inner">
+              بستگی به مقیاس پروژه دارد. یک وب‌سایت شرکتی معمولاً ۳ تا ۶ هفته، و یک اپلیکیشن پیچیده ۸ تا ۱۶ هفته زمان می‌برد. در جلسه‌ی اول، زمان‌بندی دقیق به شما ارائه می‌شود.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <div class="faq__q">
+            <span>هزینه‌ی همکاری چطور محاسبه می‌شود؟</span>
+            <span class="faq__toggle"></span>
+          </div>
+          <div class="faq__a">
+            <div class="faq__a-inner">
+              ما بر اساس دامنه‌ی پروژه، تعداد صفحات، پیچیدگی انیمیشن‌ها و مدت همکاری قیمت‌گذاری می‌کنیم. پس از جلسه‌ی کشف، یک پیشنهاد شفاف و بدون هزینه‌ی پنهان دریافت می‌کنید.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <div class="faq__q">
+            <span>آیا بعد از تحویل هم پشتیبانی می‌کنید؟</span>
+            <span class="faq__toggle"></span>
+          </div>
+          <div class="faq__a">
+            <div class="faq__a-inner">
+              بله. هر پروژه شامل ۳ ماه پشتیبانی رایگان است. پس از آن، می‌توانید پلن‌های پشتیبانی ماهانه یا سالانه را انتخاب کنید.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <div class="faq__q">
+            <span>آیا می‌توانم در طول پروژه تغییرات بدهم؟</span>
+            <span class="faq__toggle"></span>
+          </div>
+          <div class="faq__a">
+            <div class="faq__a-inner">
+              بله، اما هر پروژه یک بودجه‌ی مشخص برای بازبینی دارد. تغییرات بزرگ نیاز به توافق جدید دارند تا کیفیت و زمان‌بندی حفظ شود.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <div class="faq__q">
+            <span>با چه تکنولوژی‌هایی کار می‌کنید؟</span>
+            <span class="faq__toggle"></span>
+          </div>
+          <div class="faq__a">
+            <div class="faq__a-inner">
+              ما با تکنولوژی‌های مدرن وب مثل Next.js، React، GSAP، Three.js و Tailwind کار می‌کنیم. برای هر پروژه، مناسب‌ترین تکنولوژی انتخاب می‌شود، نه محبوب‌ترین.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CTA ═══════════ -->
+  <section class="section cta" id="cta">
+    <div class="field">
+      <div class="blob blob--pink" style="width:380px;height:380px;top:10%;left:10%;"></div>
+      <div class="blob blob--cyan" style="width:340px;height:340px;bottom:0;right:10%;"></div>
+    </div>
+    <div class="container">
+      <h2 class="cta__title" id="ctaTitle">بیایید چیزی <span class="gradient-text">به‌یادماندنی</span> بسازیم</h2>
+      <p class="cta__sub">یک ایده دارید؟ بگذارید با هم آن را به تجربه‌ای واقعی تبدیل کنیم.</p>
+      <div class="cta__actions">
+        <a href="mailto:hello@aban.studio" class="btn ripple-holder" data-magnetic data-cursor="ارسال">
+          شروع گفتگو
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </a>
+        <a href="#gallery" class="btn btn-ghost" data-magnetic data-cursor="نمایش">دیدن نمونه‌کارها</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="nav__logo">
+        <svg class="nav__logo-mark" viewBox="0 0 40 40" fill="none">
+          <path d="M20 3 L36 20 L20 37 L4 20 Z" stroke="url(#lg2)" stroke-width="2"/>
+          <defs><linearGradient id="lg2" x1="4" y1="3" x2="36" y2="37"><stop offset="0" stop-color="#34f5e0"/><stop offset="1" stop-color="#ff2e9a"/></linearGradient></defs>
+        </svg>
+        <span>آبان</span>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h4>ناوبری</h4>
+          <a href="#intro">درباره</a>
+          <a href="#features">قابلیت‌ها</a>
+          <a href="#gallery">نمونه‌کارها</a>
+          <a href="#faq">سوالات</a>
+        </div>
+        <div class="footer__col">
+          <h4>ارتباط</h4>
+          <a href="mailto:hello@aban.studio">hello@aban.studio</a>
+          <a href="tel:+982100000000">+98 21 0000 0000</a>
+        </div>
+        <div class="footer__col">
+          <h4>شبکه‌های اجتماعی</h4>
+          <a href="#">اینستاگرام</a>
+          <a href="#">لینکدین</a>
+          <a href="#">تلگرام</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© ۱۴۰۴ استودیو آبان. تمامی حقوق محفوظ است.</span>
+      <span class="lang-en">Crafted with GSAP &amp; Lenis</span>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="to-top" id="toTop" aria-label="بازگشت به بالا">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- ══════════════════════════════════════════════════════════════
+     LIBRARIES
+     ══════════════════════════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ==========================================================
+     HELPERS & FLAGS
+     ========================================================== */
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var isCoarse = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  var libsOk = (typeof gsap !== "undefined") && (typeof ScrollTrigger !== "undefined");
+  var lenis = null;
+
+  if (libsOk) gsap.registerPlugin(ScrollTrigger);
+
+  var faDigits = ["۰","۱","۲","۳","۴","۵","۶","۷","۸","۹"];
+  function toFa(n){
+    return String(Math.round(n)).replace(/[0-9]/g, function(d){ return faDigits[d]; });
+  }
+
+  /* ==========================================================
+     PRELOADER  (اصلاح‌شده: پرده قبل از محوشدن پریلودر)
+     ========================================================== */
+  function runPreloader(done){
+    var preEl = document.getElementById("preloader");
+    var countEl = document.getElementById("preCount");
+    var barEl = document.getElementById("preBar");
+    var wordEl = document.getElementById("preWord");
+    var hintEl = document.getElementById("preHint");
+
+    var welcome = "WELCOME TO ABAN";
+    var idx = 0;
+    var typeTimer = setInterval(function(){
+      wordEl.textContent = welcome.slice(0, idx + 1);
+      idx++;
+      if (idx >= welcome.length){ clearInterval(typeTimer); hintEl.style.opacity = 0.6; }
+    }, 55);
+
+    var finish = function(){
+      if (!libsOk){
+        preEl.style.display = "none";
+        done();
+        return;
+      }
+      // پریلودر محو می‌شود و کل صفحه از پایین به بالا ظاهر می‌شود
+      var tl = gsap.timeline({ onComplete: done });
+      tl.to(preEl, { yPercent: -100, duration: 1.1, ease: "expo.inOut" })
+        .set(preEl, { display: "none" });
+    };
+
+    if (!libsOk){
+      countEl.textContent = "100";
+      barEl.style.right = "0%";
+      setTimeout(finish, 400);
+      return;
+    }
+
+    var obj = { val: 0 };
+    gsap.to(obj, {
+      val: 100,
+      duration: reduceMotion ? 0.4 : 2.0,
+      ease: "power2.inOut",
+      onUpdate: function(){
+        countEl.textContent = Math.round(obj.val);
+        barEl.style.right = (100 - obj.val) + "%";
+      },
+      onComplete: finish
+    });
+  }
+
+  /* ==========================================================
+     CURSOR
+     ========================================================== */
+  function initCursor(){
+    if (isCoarse || reduceMotion) return;
+    document.body.classList.add("using-cursor");
+    var dot = document.getElementById("cursorDot");
+    var ring = document.getElementById("cursorRing");
+    var label = document.getElementById("cursorLabel");
+
+    var mx = window.innerWidth/2, my = window.innerHeight/2;
+    var rx = mx, ry = my;
+
+    window.addEventListener("mousemove", function(e){
+      mx = e.clientX; my = e.clientY;
+      dot.style.transform = "translate("+mx+"px,"+my+"px) translate(-50%,-50%)";
+    });
+
+    (function loop(){
+      rx += (mx - rx) * 0.16;
+      ry += (my - ry) * 0.16;
+      ring.style.transform = "translate("+rx+"px,"+ry+"px) translate(-50%,-50%)";
+      requestAnimationFrame(loop);
+    })();
+
+    // مقصد cursor برای همه لینک‌ها و دکمه‌ها
+    document.addEventListener("mouseover", function(e){
+      var t = e.target.closest("a, button, [data-cursor]");
+      if (t){
+        ring.classList.add("is-active");
+        label.textContent = t.getAttribute("data-cursor") || "VIEW";
+      }
+    });
+    document.addEventListener("mouseout", function(e){
+      var t = e.target.closest("a, button, [data-cursor]");
+      if (t){
+        var rt = e.relatedTarget;
+        if (!rt || !rt.closest("a, button, [data-cursor]")){
+          ring.classList.remove("is-active");
+        }
+      }
+    });
+  }
+
+  /* ==========================================================
+     MAGNETIC BUTTONS
+     ========================================================== */
+  function initMagnetic(){
+    if (isCoarse || !libsOk || reduceMotion) return;
+    document.querySelectorAll("[data-magnetic]").forEach(function(el){
+      el.addEventListener("mousemove", function(e){
+        var r = el.getBoundingClientRect();
+        var relX = e.clientX - (r.left + r.width/2);
+        var relY = e.clientY - (r.top + r.height/2);
+        gsap.to(el, { x: relX * 0.35, y: relY * 0.35, duration: .4, ease: "power2.out" });
+      });
+      el.addEventListener("mouseleave", function(){
+        gsap.to(el, { x: 0, y: 0, duration: .7, ease: "elastic.out(1, 0.4)" });
+      });
+    });
+  }
+
+  /* ==========================================================
+     RIPPLE
+     ========================================================== */
+  function initRipple(){
+    document.querySelectorAll(".ripple-holder").forEach(function(btn){
+      btn.addEventListener("click", function(e){
+        var r = btn.getBoundingClientRect();
+        var size = Math.max(r.width, r.height) * 2;
+        var span = document.createElement("span");
+        span.className = "ripple";
+        span.style.width = span.style.height = size + "px";
+        span.style.left = (e.clientX - r.left - size/2) + "px";
+        span.style.top = (e.clientY - r.top - size/2) + "px";
+        btn.appendChild(span);
+        setTimeout(function(){ span.remove(); }, 720);
+      });
+    });
+  }
+
+  /* ==========================================================
+     PARTICLES CANVAS
+     ========================================================== */
+  function initParticles(){
+    if (isCoarse || reduceMotion) return;
+    var canvas = document.getElementById("particles");
+    if (!canvas) return;
+    var ctx = canvas.getContext("2d");
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w, h, particles = [];
+    var mouseX = -9999, mouseY = -9999;
+
+    function resize(){
+      w = canvas.width = window.innerWidth * dpr;
+      h = canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      var count = Math.min(60, Math.floor(window.innerWidth * window.innerHeight / 24000));
+      particles = [];
+      for (var i = 0; i < count; i++){
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.25 * dpr,
+          vy: (Math.random() - 0.5) * 0.25 * dpr,
+          r: (Math.random() * 1.6 + 0.6) * dpr,
+          hue: Math.random() < 0.5 ? "34,245,224" : "255,46,154"
+        });
+      }
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    window.addEventListener("mousemove", function(e){
+      mouseX = e.clientX * dpr;
+      mouseY = e.clientY * dpr;
+    });
+
+    function tick(){
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < particles.length; i++){
+        var p = particles[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+
+        var dx = mouseX - p.x, dy = mouseY - p.y;
+        var dist = Math.sqrt(dx*dx + dy*dy);
+        var proximity = Math.max(0, 1 - dist / (200 * dpr));
+        var r = p.r * (1 + proximity * 1.5);
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(" + p.hue + "," + (0.4 + proximity * 0.5) + ")";
+        ctx.fill();
+
+        // اتصال نزدیک‌ترین ذرات
+        if (proximity > 0.5){
+          for (var j = i + 1; j < particles.length; j++){
+            var q = particles[j];
+            var dx2 = q.x - p.x, dy2 = q.y - p.y;
+            var d2 = Math.sqrt(dx2*dx2 + dy2*dy2);
+            if (d2 < 100 * dpr){
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(q.x, q.y);
+              ctx.strokeStyle = "rgba(34,245,224," + (0.15 * (1 - d2/(100*dpr))) + ")";
+              ctx.lineWidth = 0.6 * dpr;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ==========================================================
+     TEXT SCRAMBLE  (اصلاح‌شده)
+     ========================================================== */
+  function scrambleText(el, finalText, duration, onDone){
+    if (reduceMotion){
+      el.textContent = finalText;
+      if (onDone) onDone();
+      return;
+    }
+    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%";
+    var start = performance.now();
+    var charsArr = finalText.split("");
+
+    function frame(now){
+      var t = Math.min(1, (now - start) / duration);
+      var out = "";
+      for (var i = 0; i < charsArr.length; i++){
+        var c = charsArr[i];
+        if (c === " "){ out += " "; continue; }
+        if (Math.random() < t){
+          out += c;
+        } else {
+          out += chars[Math.floor(Math.random()*chars.length)];
+        }
+      }
+      el.textContent = out;
+      if (t < 1) requestAnimationFrame(frame);
+      else { el.textContent = finalText; if (onDone) onDone(); }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ==========================================================
+     HERO  (اصلاح‌شده: scramble با متن واقعی)
+     ========================================================== */
+  function initHero(){
+    var titleEl = document.getElementById("heroTitle");
+    var fullText = titleEl.textContent.trim();
+
+    // پاک کردن و آماده‌سازی برای scramble
+    titleEl.textContent = "";
+    var scrambleSpan = document.createElement("span");
+    scrambleSpan.style.display = "inline-block";
+    titleEl.appendChild(scrambleSpan);
+
+    function buildWords(){
+      titleEl.innerHTML = "";
+      var words = fullText.split(" ");
+      var spans = [];
+      words.forEach(function(w, i){
+        var wrap = document.createElement("span");
+        wrap.className = "word";
+        var inner = document.createElement("span");
+        inner.textContent = w;
+        wrap.appendChild(inner);
+        titleEl.appendChild(wrap);
+        if (i < words.length - 1) titleEl.appendChild(document.createTextNode(" "));
+        spans.push(inner);
+      });
+      return spans;
+    }
+
+    if (!libsOk){
+      titleEl.textContent = fullText;
+      document.getElementById("heroEyebrow").style.opacity = 1;
+      document.getElementById("heroSub").style.opacity = 1;
+      document.getElementById("heroCtas").style.opacity = 1;
+      document.getElementById("heroScroll").style.opacity = 1;
+      return;
+    }
+
+    // scramble روی متن کوتاه، بعد reveal با متن واقعی
+    scrambleText(scrambleSpan, "ABAN STUDIO", 1200, function(){
+      var spans = buildWords();
+      var tl = gsap.timeline({ delay: 0.05 });
+      tl.to("#heroEyebrow", { opacity: 1, duration: .5 }, 0)
+        .to(spans, { y: "0%", duration: 1.1, stagger: 0.08, ease: "power4.out" }, 0.2)
+        .to("#heroSub", { opacity: 1, y: 0, duration: .8, ease: "power2.out" }, "-=0.6")
+        .to("#heroCtas", { opacity: 1, y: 0, duration: .8, ease: "power2.out" }, "-=0.55")
+        .to("#heroScroll", { opacity: 1, duration: .6 }, "-=0.4");
+    });
+
+    // پارالاکس هیرو
+    ScrollTrigger.create({
+      trigger: "#hero",
+      start: "top top",
+      end: "bottom top",
+      scrub: true,
+      animation: gsap.timeline()
+        .to("#heroTitle", { y: -120, opacity: 0.15, ease: "none" }, 0)
+        .to("#heroSub", { y: -60, opacity: 0, ease: "none" }, 0)
+        .to(".hero__eyebrow", { y: -40, opacity: 0, ease: "none" }, 0)
+    });
+  }
+
+  /* ==========================================================
+     MARQUEE
+     ========================================================== */
+  function initMarquee(){
+    var track = document.getElementById("marqueeTrack");
+    if (!track || !libsOk) return;
+
+    // تکرار محتوا برای پر شدن
+    var original = track.innerHTML;
+    for (var i = 0; i < 4; i++) track.innerHTML += original;
+
+    var totalWidth = track.scrollWidth / 2;
+
+    if (reduceMotion) return;
+
+    var currentX = 0;
+    var speed = 0.5;
+
+    function loop(){
+      currentX -= speed;
+      if (Math.abs(currentX) >= totalWidth) currentX = 0;
+      track.style.transform = "translateX(" + currentX + "px)";
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    // واکنش به اسکرول: سرعت بیشتر
+    if (libsOk){
+      ScrollTrigger.create({
+        trigger: ".marquee",
+        start: "top bottom",
+        end: "bottom top",
+        onUpdate: function(self){
+          var v = self.getVelocity();
+          speed = 0.5 + Math.min(Math.abs(v) / 400, 3);
+        }
+      });
+    }
+  }
+
+  /* ==========================================================
+     INTRO SPLIT LINES
+     ========================================================== */
+  function initIntro(){
+    var container = document.querySelector(".intro__text");
+    if (!container || !libsOk) return;
+    var spans = container.querySelectorAll(".split-line > span");
+    gsap.set(spans, { yPercent: 110, opacity: 0 });
+    gsap.to(spans, {
+      yPercent: 0, opacity: 1,
+      duration: 1, stagger: 0.12, ease: "power4.out",
+      scrollTrigger: { trigger: "#intro", start: "top 75%" }
+    });
+  }
+
+  /* ==========================================================
+     PIN ZOOM
+     ========================================================== */
+  function initPinZoom(){
+    if (!libsOk) return;
+    var text = document.querySelector(".pin-zoom__text");
+    gsap.set(text, { scale: 0.55, opacity: 0.15 });
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".pin-zoom",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.6
+      }
+    });
+    tl.to(text, { scale: 1.3, opacity: 1, ease: "power1.inOut" }, 0)
+      .to(text, { scale: 0.7, opacity: 0.15, ease: "power1.inOut" }, 0.6);
+  }
+
+  /* ==========================================================
+     BENTO CARDS (tilt + reveal)
+     ========================================================== */
+  function initBento(){
+    if (!libsOk) return;
+    var cards = document.querySelectorAll(".bento-card");
+
+    cards.forEach(function(card, i){
+      gsap.fromTo(card,
+        { autoAlpha: 0, y: 60 },
+        {
+          autoAlpha: 1, y: 0,
+          duration: 0.9, ease: "power3.out",
+          delay: (i % 3) * 0.08,
+          scrollTrigger: { trigger: card, start: "top 88%" }
+        }
+      );
+
+      // tilt سه‌بعدی
+      if (!isCoarse && !reduceMotion){
+        card.addEventListener("mousemove", function(e){
+          var r = card.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          gsap.to(card, {
+            rotateY: px * 8,
+            rotateX: -py * 8,
+            duration: 0.5,
+            ease: "power2.out",
+            transformPerspective: 800
+          });
+          card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+          card.style.setProperty("--my", (e.clientY - r.top) + "px");
+        });
+        card.addEventListener("mouseleave", function(){
+          gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.7, ease: "power2.out" });
+        });
+      }
+    });
+  }
+
+  /* ==========================================================
+     HORIZONTAL GALLERY (اصلاح‌شده: hover با GSAP)
+     ========================================================== */
+  function initHorizontalGallery(){
+    if (!libsOk) return;
+    var track = document.getElementById("hTrack");
+    var stage = document.querySelector(".hgallery__stage");
+
+    function getScrollDistance(){
+      return track.scrollWidth - stage.clientWidth + 80;
+    }
+
+    var tween = gsap.to(track, {
+      x: function(){ return -getScrollDistance(); },
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hgallery",
+        start: "top top",
+        end: function(){ return "+=" + (getScrollDistance() + window.innerHeight); },
+        scrub: 0.7,
+        pin: ".hgallery__stage",
+        invalidateOnRefresh: true
+      }
+    });
+
+    gsap.utils.toArray(".gallery-card").forEach(function(card, i){
+      // reveal با اسکرول افقی
+      gsap.fromTo(card,
+        { autoAlpha: 0.35, scale: 0.92 },
+        {
+          autoAlpha: 1, scale: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: card,
+            containerAnimation: tween,
+            start: "left 90%",
+            end: "left 45%",
+            scrub: true
+          }
+        }
+      );
+
+      // hover با GSAP (اصلاح باگ)
+      if (!isCoarse && !reduceMotion){
+        card.addEventListener("mouseenter", function(){
+          gsap.to(card, {
+            y: -12, scale: 1.02,
+            boxShadow: "0 30px 60px -20px rgba(52,245,224,.35)",
+            duration: 0.5,
+            ease: "power3.out"
+          });
+        });
+        card.addEventListener("mouseleave", function(){
+          gsap.to(card, {
+            y: 0, scale: 1,
+            boxShadow: "0 0 0 rgba(0,0,0,0)",
+            duration: 0.6,
+            ease: "power3.out"
+          });
+        });
+      }
+    });
+  }
+
+  /* ==========================================================
+     COUNTERS
+     ========================================================== */
+  function initCounters(){
+    document.querySelectorAll(".counter").forEach(function(el){
+      var target = parseFloat(el.getAttribute("data-target")) || 0;
+      var suffix = el.getAttribute("data-suffix") || "";
+      // تبدیل % به ٪
+      suffix = suffix.replace(/%/g, "٪");
+
+      var run = function(){
+        if (!libsOk || reduceMotion){
+          el.textContent = toFa(target) + suffix;
+          return;
+        }
+        var obj = { val: 0 };
+        gsap.to(obj, {
+          val: target,
+          duration: 1.8,
+          ease: "power2.out",
+          onUpdate: function(){ el.textContent = toFa(obj.val) + suffix; }
+        });
+      };
+
+      if (libsOk){
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 85%",
+          once: true,
+          onEnter: run
+        });
+      } else {
+        run();
+      }
+    });
+  }
+
+  /* ==========================================================
+     PIN QUOTE
+     ========================================================== */
+  function initPinQuote(){
+    if (!libsOk) return;
+    var q = document.querySelector(".pin-quote blockquote");
+    gsap.fromTo(q, { clipPath: "inset(0 100% 0 0)" }, {
+      clipPath: "inset(0 0% 0 0)",
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".pin-quote",
+        start: "top top",
+        end: "center center",
+        scrub: 0.6
+      }
+    });
+    gsap.fromTo(".pin-quote cite", { opacity: 0 }, {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: ".pin-quote",
+        start: "center center",
+        end: "+=20%",
+        scrub: true
+      }
+    });
+  }
+
+  /* ==========================================================
+     TESTIMONIALS
+     ========================================================== */
+  function initTestimonials(){
+    var viewport = document.getElementById("testimonialViewport");
+    var dots = document.querySelectorAll(".testimonials__dot");
+    if (!viewport || !dots.length) return;
+
+    var idx = 0;
+    var total = dots.length;
+    var autoTimer;
+
+    function go(i){
+      idx = (i + total) % total;
+      viewport.style.transform = "translateX(" + (idx * 100) + "%)";
+      dots.forEach(function(d, k){ d.classList.toggle("is-active", k === idx); });
+    }
+
+    function auto(){
+      clearInterval(autoTimer);
+      autoTimer = setInterval(function(){ go(idx + 1); }, 5500);
+    }
+
+    dots.forEach(function(d, k){
+      d.addEventListener("click", function(){ go(k); auto(); });
+    });
+
+    auto();
+  }
+
+  /* ==========================================================
+     PROCESS
+     ========================================================== */
+  function initProcess(){
+    if (!libsOk) return;
+    gsap.utils.toArray(".process__item").forEach(function(item){
+      gsap.fromTo(item, { autoAlpha: 0, x: -40 }, {
+        autoAlpha: 1, x: 0, duration: .8, ease: "power3.out",
+        scrollTrigger: { trigger: item, start: "top 90%" }
+      });
+    });
+  }
+
+  /* ==========================================================
+     FAQ
+     ========================================================== */
+  function initFAQ(){
+    document.querySelectorAll(".faq__item").forEach(function(item){
+      var q = item.querySelector(".faq__q");
+      var a = item.querySelector(".faq__a");
+      q.addEventListener("click", function(){
+        var isOpen = item.classList.contains("is-open");
+        // بستن بقیه
+        document.querySelectorAll(".faq__item.is-open").forEach(function(other){
+          if (other !== item){
+            other.classList.remove("is-open");
+            other.querySelector(".faq__a").style.maxHeight = "0px";
+          }
+        });
+        if (isOpen){
+          item.classList.remove("is-open");
+          a.style.maxHeight = "0px";
+        } else {
+          item.classList.add("is-open");
+          a.style.maxHeight = a.scrollHeight + "px";
+        }
+      });
+    });
+  }
+
+  /* ==========================================================
+     CTA FINAL
+     ========================================================== */
+  function initCtaFinal(){
+    if (!libsOk) return;
+    gsap.fromTo("#ctaTitle", { scale: 0.65, opacity: 0.3 }, {
+      scale: 1, opacity: 1, ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#cta",
+        start: "top 80%",
+        end: "top 30%",
+        scrub: 0.6
+      }
+    });
+  }
+
+  /* ==========================================================
+     SECTION HEADINGS
+     ========================================================== */
+  function initSectionHeadings(){
+    if (!libsOk) return;
+    gsap.utils.toArray(".section-tag, .heading-lg").forEach(function(el){
+      gsap.fromTo(el, { autoAlpha: 0, y: 24 }, {
+        autoAlpha: 1, y: 0, duration: .8, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 92%" }
+      });
+    });
+  }
+
+  /* ==========================================================
+     PARALLAX BLOBS
+     ========================================================== */
+  function initParallaxBlobs(){
+    if (!libsOk || reduceMotion) return;
+    document.querySelectorAll(".blob[data-speed]").forEach(function(blob){
+      var speed = parseFloat(blob.getAttribute("data-speed")) || 0.3;
+      gsap.to(blob, {
+        y: function(){ return -300 * speed; },
+        ease: "none",
+        scrollTrigger: {
+          trigger: blob.closest("section") || blob.parentElement,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    });
+    document.querySelectorAll(".blob").forEach(function(b, i){
+      gsap.to(b, {
+        x: "+=" + (20 + i*8),
+        duration: 6 + i,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    });
+  }
+
+  /* ==========================================================
+     LENIS SMOOTH SCROLL  (اصلاح‌شده: anchor ها با Lenis)
+     ========================================================== */
+  function initLenis(){
+    if (typeof Lenis === "undefined" || reduceMotion) return null;
+
+    var l = new Lenis({
+      duration: 1.2,
+      easing: function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true,
+      touchMultiplier: 1.4
+    });
+
+    if (libsOk){
+      l.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add(function(time){ l.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(500, 33);
+    } else {
+      requestAnimationFrame(function raf(time){ l.raf(time); requestAnimationFrame(raf); });
+    }
+
+    // اصلاح باگ: intercept کردن anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener("click", function(e){
+        var href = a.getAttribute("href");
+        if (href === "#" || href === "#top"){
+          e.preventDefault();
+          l.scrollTo(0, { duration: 1.5 });
+          return;
+        }
+        var target = document.querySelector(href);
+        if (target){
+          e.preventDefault();
+          l.scrollTo(target, { duration: 1.5, offset: -80 });
+        }
+      });
+    });
+
+    return l;
+  }
+
+  /* ==========================================================
+     NAV
+     ========================================================== */
+  function initNav(){
+    var nav = document.getElementById("siteNav");
+    window.addEventListener("scroll", function(){
+      nav.classList.toggle("is-scrolled", window.scrollY > 40);
+    }, { passive: true });
+
+    var burger = document.getElementById("burger");
+    var menu = document.getElementById("mobileMenu");
+    burger.addEventListener("click", function(){
+      var open = menu.classList.toggle("is-open");
+      burger.classList.toggle("is-open", open);
+      document.body.classList.toggle("is-locked", open);
+    });
+    menu.querySelectorAll("a").forEach(function(a){
+      a.addEventListener("click", function(){
+        menu.classList.remove("is-open");
+        burger.classList.remove("is-open");
+        document.body.classList.remove("is-locked");
+      });
+    });
+  }
+
+  /* ==========================================================
+     SCROLL PROGRESS + BADGE + TO TOP
+     ========================================================== */
+  function initScrollUI(){
+    var bar = document.getElementById("scrollBar");
+    var badge = document.getElementById("scrollBadge");
+    var num = document.getElementById("sbNum");
+    var toTop = document.getElementById("toTop");
+
+    var sections = document.querySelectorAll("section[id]");
+    var total = sections.length;
+    document.querySelector(".scroll-badge__total").textContent = "/ " + toNum(total);
+
+    function toNum(n){
+      var fa = ["۰","۱","۲","۳","۴","۵","۶","۷","۸","۹"];
+      return String(n).padStart(2, "0").replace(/[0-9]/g, function(d){ return fa[d]; });
+    }
+
+    var raf = null;
+    function update(){
+      var h = document.documentElement;
+      var scrolled = h.scrollTop / Math.max(1, (h.scrollHeight - h.clientHeight)) * 100;
+      bar.style.width = scrolled + "%";
+
+      badge.classList.toggle("is-on", h.scrollTop > 300);
+      toTop.classList.toggle("is-on", h.scrollTop > 600);
+
+      // پیدا کردن بخش فعال
+      var cur = 1;
+      sections.forEach(function(s, i){
+        var r = s.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.4){
+          cur = i + 1;
+        }
+      });
+      num.textContent = toNum(cur);
+      raf = null;
+    }
+    window.addEventListener("scroll", function(){
+      if (raf) return;
+      raf = requestAnimationFrame(update);
+    }, { passive: true });
+    update();
+
+    toTop.addEventListener("click", function(){
+      if (lenis) lenis.scrollTo(0, { duration: 1.5 });
+      else window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  /* ==========================================================
+     THEME TOGGLE
+     ========================================================== */
+  function initTheme(){
+    var saved = null;
+    try { saved = localStorage.getItem("aban-theme"); } catch(e){}
+    if (saved) document.documentElement.setAttribute("data-theme", saved);
+
+    var btn = document.getElementById("themeToggle");
+    btn.addEventListener("click", function(){
+      var cur = document.documentElement.getAttribute("data-theme") || "dark";
+      var next = cur === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("aban-theme", next); } catch(e){}
+      if (libsOk){
+        gsap.fromTo("body", { opacity: 0.85 }, { opacity: 1, duration: 0.4 });
+      }
+    });
+  }
+
+  /* ==========================================================
+     BOOT
+     ========================================================== */
+  document.addEventListener("DOMContentLoaded", function(){
+    initTheme();
+    initNav();
+    initScrollUI();
+    initCursor();
+    initRipple();
+    initFAQ();
+    initTestimonials();
+    initParticles();
+
+    runPreloader(function(){
+      lenis = initLenis();
+      initHero();
+      initMarquee();
+      initParallaxBlobs();
+      initIntro();
+      initPinZoom();
+      initBento();
+      initHorizontalGallery();
+      initCounters();
+      initPinQuote();
+      initProcess();
+      initCtaFinal();
+      initSectionHeadings();
+      initMagnetic();
+
+      if (libsOk){
+        ScrollTrigger.refresh();
+        window.addEventListener("resize", function(){
+          clearTimeout(window.__stRefresh);
+          window.__stRefresh = setTimeout(function(){ ScrollTrigger.refresh(); }, 250);
+        });
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+  </html>
